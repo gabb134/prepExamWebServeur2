@@ -1,0 +1,50 @@
+﻿@model dbfirst.Models.Entreprise_Entreprise
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Entreprise_Entreprise</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EntrepriseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EntrepriseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EntrepriseNote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EntrepriseNote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateInscrit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateInscrit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateMod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateMod)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EntrepriseID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dd78d0f2bcff46409ccfe4467709848f" Name="Diagram1">
+        <EntityTypeShape EntityType="BDW56Projet1GabrielModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDW56Projet1GabrielModel.Employee_Employee" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDW56Projet1GabrielModel.Employee_PhoneNumber" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDW56Projet1GabrielModel.Employee_PhoneNumberType" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDW56Projet1GabrielModel.Entreprise_Address" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDW56Projet1GabrielModel.Entreprise_AddressType" Width="1.5" PointX="3.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDW56Projet1GabrielModel.Entreprise_Entreprise" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <AssociationConnector Association="BDW56Projet1GabrielModel.FK_dbo_Employee_Employee_dbo_Entreprise_Entreprise_EntrepriseID" ManuallyRouted="false" />
+        <AssociationConnector Association="BDW56Projet1GabrielModel.FK_dbo_Employee_PhoneNumber_dbo_Employee_Employee_EmployeeID" ManuallyRouted="false" />
+        <AssociationConnector Association="BDW56Projet1GabrielModel.FK_dbo_Employee_PhoneNumber_dbo_Employee_PhoneNumberType_PhoneNumberTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="BDW56Projet1GabrielModel.FK_dbo_Entreprise_Address_dbo_Entreprise_AddressType_AddressTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="BDW56Projet1GabrielModel.FK_dbo_Entreprise_Address_dbo_Entreprise_Entreprise_EntrepriseID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

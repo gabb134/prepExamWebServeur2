@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BDW56Projet1GabrielModelStoreContainer" CdmEntityContainer="BDW56Projet1GabrielEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee_Employee">
+      <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.Employee_Employee">
+        <MappingFragment StoreEntitySet="Employee_Employee">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Titre" ColumnName="Titre" />
+          <ScalarProperty Name="Departement" ColumnName="Departement" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="EntrepriseID" ColumnName="EntrepriseID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee_PhoneNumber">
+      <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.Employee_PhoneNumber">
+        <MappingFragment StoreEntitySet="Employee_PhoneNumber">
+          <ScalarProperty Name="PhoneNumberID" ColumnName="PhoneNumberID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="PhoneNumberTypeID" ColumnName="PhoneNumberTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee_PhoneNumberType">
+      <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.Employee_PhoneNumberType">
+        <MappingFragment StoreEntitySet="Employee_PhoneNumberType">
+          <ScalarProperty Name="PhoneNumberTypeID" ColumnName="PhoneNumberTypeID" />
+          <ScalarProperty Name="PhoneNumbertype" ColumnName="PhoneNumbertype" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Entreprise_Address">
+      <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.Entreprise_Address">
+        <MappingFragment StoreEntitySet="Entreprise_Address">
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="EntrepriseAddWeb" ColumnName="EntrepriseAddWeb" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="AddressTypeID" ColumnName="AddressTypeID" />
+          <ScalarProperty Name="EntrepriseID" ColumnName="EntrepriseID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Entreprise_AddressType">
+      <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.Entreprise_AddressType">
+        <MappingFragment StoreEntitySet="Entreprise_AddressType">
+          <ScalarProperty Name="AddressTypeID" ColumnName="AddressTypeID" />
+          <ScalarProperty Name="AddressType" ColumnName="AddressType" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Entreprise_Entreprise">
+      <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.Entreprise_Entreprise">
+        <MappingFragment StoreEntitySet="Entreprise_Entreprise">
+          <ScalarProperty Name="EntrepriseID" ColumnName="EntrepriseID" />
+          <ScalarProperty Name="EntrepriseName" ColumnName="EntrepriseName" />
+          <ScalarProperty Name="EntrepriseNote" ColumnName="EntrepriseNote" />
+          <ScalarProperty Name="DateInscrit" ColumnName="DateInscrit" />
+          <ScalarProperty Name="DateMod" ColumnName="DateMod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

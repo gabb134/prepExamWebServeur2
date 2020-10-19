@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BDW56Projet1GabrielModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee_Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Titre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Departement" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="EntrepriseID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee_PhoneNumber">
+          <Key>
+            <PropertyRef Name="PhoneNumberID" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="PhoneNumberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="PhoneNumberTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee_PhoneNumberType">
+          <Key>
+            <PropertyRef Name="PhoneNumberTypeID" />
+          </Key>
+          <Property Name="PhoneNumberTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhoneNumbertype" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entreprise_Address">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AddressLine1" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AddressLine2" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Province" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostalCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EntrepriseAddWeb" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="AddressTypeID" Type="int" Nullable="false" />
+          <Property Name="EntrepriseID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entreprise_AddressType">
+          <Key>
+            <PropertyRef Name="AddressTypeID" />
+          </Key>
+          <Property Name="AddressTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AddressType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entreprise_Entreprise">
+          <Key>
+            <PropertyRef Name="EntrepriseID" />
+          </Key>
+          <Property Name="EntrepriseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntrepriseName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EntrepriseNote" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateInscrit" Type="datetime" Nullable="false" />
+          <Property Name="DateMod" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Employee_Employee_dbo_Entreprise_Entreprise_EntrepriseID">
+          <End Role="Entreprise_Entreprise" Type="Self.Entreprise_Entreprise" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee_Employee" Type="Self.Employee_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entreprise_Entreprise">
+              <PropertyRef Name="EntrepriseID" />
+            </Principal>
+            <Dependent Role="Employee_Employee">
+              <PropertyRef Name="EntrepriseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employee_PhoneNumber_dbo_Employee_Employee_EmployeeID">
+          <End Role="Employee_Employee" Type="Self.Employee_Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee_PhoneNumber" Type="Self.Employee_PhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Employee_PhoneNumber">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employee_PhoneNumber_dbo_Employee_PhoneNumberType_PhoneNumberTypeID">
+          <End Role="Employee_PhoneNumberType" Type="Self.Employee_PhoneNumberType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee_PhoneNumber" Type="Self.Employee_PhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_PhoneNumberType">
+              <PropertyRef Name="PhoneNumberTypeID" />
+            </Principal>
+            <Dependent Role="Employee_PhoneNumber">
+              <PropertyRef Name="PhoneNumberTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Entreprise_Address_dbo_Entreprise_AddressType_AddressTypeID">
+          <End Role="Entreprise_AddressType" Type="Self.Entreprise_AddressType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Entreprise_Address" Type="Self.Entreprise_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entreprise_AddressType">
+              <PropertyRef Name="AddressTypeID" />
+            </Principal>
+            <Dependent Role="Entreprise_Address">
+              <PropertyRef Name="AddressTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Entreprise_Address_dbo_Entreprise_Entreprise_EntrepriseID">
+          <End Role="Entreprise_Entreprise" Type="Self.Entreprise_Entreprise" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Entreprise_Address" Type="Self.Entreprise_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entreprise_Entreprise">
+              <PropertyRef Name="EntrepriseID" />
+            </Principal>
+            <Dependent Role="Entreprise_Address">
+              <PropertyRef Name="EntrepriseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDW56Projet1GabrielModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee_Employee" EntityType="Self.Employee_Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee_PhoneNumber" EntityType="Self.Employee_PhoneNumber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee_PhoneNumberType" EntityType="Self.Employee_PhoneNumberType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entreprise_Address" EntityType="Self.Entreprise_Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entreprise_AddressType" EntityType="Self.Entreprise_AddressType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entreprise_Entreprise" EntityType="Self.Entreprise_Entreprise" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Employee_Employee_dbo_Entreprise_Entreprise_EntrepriseID" Association="Self.FK_dbo_Employee_Employee_dbo_Entreprise_Entreprise_EntrepriseID">
+            <End Role="Entreprise_Entreprise" EntitySet="Entreprise_Entreprise" />
+            <End Role="Employee_Employee" EntitySet="Employee_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employee_PhoneNumber_dbo_Employee_Employee_EmployeeID" Association="Self.FK_dbo_Employee_PhoneNumber_dbo_Employee_Employee_EmployeeID">
+            <End Role="Employee_Employee" EntitySet="Employee_Employee" />
+            <End Role="Employee_PhoneNumber" EntitySet="Employee_PhoneNumber" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employee_PhoneNumber_dbo_Employee_PhoneNumberType_PhoneNumberTypeID" Association="Self.FK_dbo_Employee_PhoneNumber_dbo_Employee_PhoneNumberType_PhoneNumberTypeID">
+            <End Role="Employee_PhoneNumberType" EntitySet="Employee_PhoneNumberType" />
+            <End Role="Employee_PhoneNumber" EntitySet="Employee_PhoneNumber" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Entreprise_Address_dbo_Entreprise_AddressType_AddressTypeID" Association="Self.FK_dbo_Entreprise_Address_dbo_Entreprise_AddressType_AddressTypeID">
+            <End Role="Entreprise_AddressType" EntitySet="Entreprise_AddressType" />
+            <End Role="Entreprise_Address" EntitySet="Entreprise_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Entreprise_Address_dbo_Entreprise_Entreprise_EntrepriseID" Association="Self.FK_dbo_Entreprise_Address_dbo_Entreprise_Entreprise_EntrepriseID">
+            <End Role="Entreprise_Entreprise" EntitySet="Entreprise_Entreprise" />
+            <End Role="Entreprise_Address" EntitySet="Entreprise_Address" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDW56Projet1GabrielModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee_Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Titre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Departement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EntrepriseID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Entreprise_Entreprise" Relationship="Self.FK_dbo_Employee_Employee_dbo_Entreprise_Entreprise_EntrepriseID" FromRole="Employee_Employee" ToRole="Entreprise_Entreprise" />
+          <NavigationProperty Name="Employee_PhoneNumber" Relationship="Self.FK_dbo_Employee_PhoneNumber_dbo_Employee_Employee_EmployeeID" FromRole="Employee_Employee" ToRole="Employee_PhoneNumber" />
+        </EntityType>
+        <EntityType Name="Employee_PhoneNumber">
+          <Key>
+            <PropertyRef Name="PhoneNumberID" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="PhoneNumberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PhoneNumberTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee_Employee" Relationship="Self.FK_dbo_Employee_PhoneNumber_dbo_Employee_Employee_EmployeeID" FromRole="Employee_PhoneNumber" ToRole="Employee_Employee" />
+          <NavigationProperty Name="Employee_PhoneNumberType" Relationship="Self.FK_dbo_Employee_PhoneNumber_dbo_Employee_PhoneNumberType_PhoneNumberTypeID" FromRole="Employee_PhoneNumber" ToRole="Employee_PhoneNumberType" />
+        </EntityType>
+        <EntityType Name="Employee_PhoneNumberType">
+          <Key>
+            <PropertyRef Name="PhoneNumberTypeID" />
+          </Key>
+          <Property Name="PhoneNumberTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhoneNumbertype" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employee_PhoneNumber" Relationship="Self.FK_dbo_Employee_PhoneNumber_dbo_Employee_PhoneNumberType_PhoneNumberTypeID" FromRole="Employee_PhoneNumberType" ToRole="Employee_PhoneNumber" />
+        </EntityType>
+        <EntityType Name="Entreprise_Address">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Province" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EntrepriseAddWeb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AddressTypeID" Type="Int32" Nullable="false" />
+          <Property Name="EntrepriseID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Entreprise_AddressType" Relationship="Self.FK_dbo_Entreprise_Address_dbo_Entreprise_AddressType_AddressTypeID" FromRole="Entreprise_Address" ToRole="Entreprise_AddressType" />
+          <NavigationProperty Name="Entreprise_Entreprise" Relationship="Self.FK_dbo_Entreprise_Address_dbo_Entreprise_Entreprise_EntrepriseID" FromRole="Entreprise_Address" ToRole="Entreprise_Entreprise" />
+        </EntityType>
+        <EntityType Name="Entreprise_AddressType">
+          <Key>
+            <PropertyRef Name="AddressTypeID" />
+          </Key>
+          <Property Name="AddressTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AddressType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Entreprise_Address" Relationship="Self.FK_dbo_Entreprise_Address_dbo_Entreprise_AddressType_AddressTypeID" FromRole="Entreprise_AddressType" ToRole="Entreprise_Address" />
+        </EntityType>
+        <EntityType Name="Entreprise_Entreprise">
+          <Key>
+            <PropertyRef Name="EntrepriseID" />
+          </Key>
+          <Property Name="EntrepriseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntrepriseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EntrepriseNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateInscrit" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateMod" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employee_Employee" Relationship="Self.FK_dbo_Employee_Employee_dbo_Entreprise_Entreprise_EntrepriseID" FromRole="Entreprise_Entreprise" ToRole="Employee_Employee" />
+          <NavigationProperty Name="Entreprise_Address" Relationship="Self.FK_dbo_Entreprise_Address_dbo_Entreprise_Entreprise_EntrepriseID" FromRole="Entreprise_Entreprise" ToRole="Entreprise_Address" />
+        </EntityType>
+        <Association Name="FK_dbo_Employee_Employee_dbo_Entreprise_Entreprise_EntrepriseID">
+          <End Role="Entreprise_Entreprise" Type="Self.Entreprise_Entreprise" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee_Employee" Type="Self.Employee_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entreprise_Entreprise">
+              <PropertyRef Name="EntrepriseID" />
+            </Principal>
+            <Dependent Role="Employee_Employee">
+              <PropertyRef Name="EntrepriseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employee_PhoneNumber_dbo_Employee_Employee_EmployeeID">
+          <End Role="Employee_Employee" Type="Self.Employee_Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee_PhoneNumber" Type="Self.Employee_PhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Employee_PhoneNumber">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employee_PhoneNumber_dbo_Employee_PhoneNumberType_PhoneNumberTypeID">
+          <End Role="Employee_PhoneNumberType" Type="Self.Employee_PhoneNumberType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee_PhoneNumber" Type="Self.Employee_PhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_PhoneNumberType">
+              <PropertyRef Name="PhoneNumberTypeID" />
+            </Principal>
+            <Dependent Role="Employee_PhoneNumber">
+              <PropertyRef Name="PhoneNumberTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Entreprise_Address_dbo_Entreprise_AddressType_AddressTypeID">
+          <End Role="Entreprise_AddressType" Type="Self.Entreprise_AddressType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Entreprise_Address" Type="Self.Entreprise_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entreprise_AddressType">
+              <PropertyRef Name="AddressTypeID" />
+            </Principal>
+            <Dependent Role="Entreprise_Address">
+              <PropertyRef Name="AddressTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Entreprise_Address_dbo_Entreprise_Entreprise_EntrepriseID">
+          <End Role="Entreprise_Entreprise" Type="Self.Entreprise_Entreprise" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Entreprise_Address" Type="Self.Entreprise_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entreprise_Entreprise">
+              <PropertyRef Name="EntrepriseID" />
+            </Principal>
+            <Dependent Role="Entreprise_Address">
+              <PropertyRef Name="EntrepriseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDW56Projet1GabrielEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Employee_Employee" EntityType="Self.Employee_Employee" />
+          <EntitySet Name="Employee_PhoneNumber" EntityType="Self.Employee_PhoneNumber" />
+          <EntitySet Name="Employee_PhoneNumberType" EntityType="Self.Employee_PhoneNumberType" />
+          <EntitySet Name="Entreprise_Address" EntityType="Self.Entreprise_Address" />
+          <EntitySet Name="Entreprise_AddressType" EntityType="Self.Entreprise_AddressType" />
+          <EntitySet Name="Entreprise_Entreprise" EntityType="Self.Entreprise_Entreprise" />
+          <AssociationSet Name="FK_dbo_Employee_Employee_dbo_Entreprise_Entreprise_EntrepriseID" Association="Self.FK_dbo_Employee_Employee_dbo_Entreprise_Entreprise_EntrepriseID">
+            <End Role="Entreprise_Entreprise" EntitySet="Entreprise_Entreprise" />
+            <End Role="Employee_Employee" EntitySet="Employee_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employee_PhoneNumber_dbo_Employee_Employee_EmployeeID" Association="Self.FK_dbo_Employee_PhoneNumber_dbo_Employee_Employee_EmployeeID">
+            <End Role="Employee_Employee" EntitySet="Employee_Employee" />
+            <End Role="Employee_PhoneNumber" EntitySet="Employee_PhoneNumber" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employee_PhoneNumber_dbo_Employee_PhoneNumberType_PhoneNumberTypeID" Association="Self.FK_dbo_Employee_PhoneNumber_dbo_Employee_PhoneNumberType_PhoneNumberTypeID">
+            <End Role="Employee_PhoneNumberType" EntitySet="Employee_PhoneNumberType" />
+            <End Role="Employee_PhoneNumber" EntitySet="Employee_PhoneNumber" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Entreprise_Address_dbo_Entreprise_AddressType_AddressTypeID" Association="Self.FK_dbo_Entreprise_Address_dbo_Entreprise_AddressType_AddressTypeID">
+            <End Role="Entreprise_AddressType" EntitySet="Entreprise_AddressType" />
+            <End Role="Entreprise_Address" EntitySet="Entreprise_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Entreprise_Address_dbo_Entreprise_Entreprise_EntrepriseID" Association="Self.FK_dbo_Entreprise_Address_dbo_Entreprise_Entreprise_EntrepriseID">
+            <End Role="Entreprise_Entreprise" EntitySet="Entreprise_Entreprise" />
+            <End Role="Entreprise_Address" EntitySet="Entreprise_Address" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDW56Projet1GabrielModelStoreContainer" CdmEntityContainer="BDW56Projet1GabrielEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee_Employee">
+            <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.Employee_Employee">
+              <MappingFragment StoreEntitySet="Employee_Employee">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="Departement" ColumnName="Departement" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="EntrepriseID" ColumnName="EntrepriseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee_PhoneNumber">
+            <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.Employee_PhoneNumber">
+              <MappingFragment StoreEntitySet="Employee_PhoneNumber">
+                <ScalarProperty Name="PhoneNumberID" ColumnName="PhoneNumberID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="PhoneNumberTypeID" ColumnName="PhoneNumberTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee_PhoneNumberType">
+            <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.Employee_PhoneNumberType">
+              <MappingFragment StoreEntitySet="Employee_PhoneNumberType">
+                <ScalarProperty Name="PhoneNumberTypeID" ColumnName="PhoneNumberTypeID" />
+                <ScalarProperty Name="PhoneNumbertype" ColumnName="PhoneNumbertype" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entreprise_Address">
+            <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.Entreprise_Address">
+              <MappingFragment StoreEntitySet="Entreprise_Address">
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="EntrepriseAddWeb" ColumnName="EntrepriseAddWeb" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="AddressTypeID" ColumnName="AddressTypeID" />
+                <ScalarProperty Name="EntrepriseID" ColumnName="EntrepriseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entreprise_AddressType">
+            <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.Entreprise_AddressType">
+              <MappingFragment StoreEntitySet="Entreprise_AddressType">
+                <ScalarProperty Name="AddressTypeID" ColumnName="AddressTypeID" />
+                <ScalarProperty Name="AddressType" ColumnName="AddressType" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entreprise_Entreprise">
+            <EntityTypeMapping TypeName="BDW56Projet1GabrielModel.Entreprise_Entreprise">
+              <MappingFragment StoreEntitySet="Entreprise_Entreprise">
+                <ScalarProperty Name="EntrepriseID" ColumnName="EntrepriseID" />
+                <ScalarProperty Name="EntrepriseName" ColumnName="EntrepriseName" />
+                <ScalarProperty Name="EntrepriseNote" ColumnName="EntrepriseNote" />
+                <ScalarProperty Name="DateInscrit" ColumnName="DateInscrit" />
+                <ScalarProperty Name="DateMod" ColumnName="DateMod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
